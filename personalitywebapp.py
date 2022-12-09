@@ -153,14 +153,24 @@ if r1  == "Classification Models":
     ]
     classif=st.selectbox("Classification Model", clfnames)
     if classif == "KNN":
-        classifier=KNeighborsClassifier(4)
+        '''
+        #### Select Number of neighbors to use:
+        '''
+        n=st.slider("",2,20,4)
+        classifier=KNeighborsClassifier(n)
     if classif == "Random Forest":
-        classifier=RandomForestClassifier(max_depth=5, n_estimators=64)
+        ndept=st.slider("Select Depth",2,15,5)
+        est=st.slider("Select Number of estimators",40,100,64)
+        classifier=RandomForestClassifier(max_depth=ndept, n_estimators=est)
+
     if classif == "Decision Tree":
-        classifier=DecisionTreeClassifier(max_depth=16)
+        ndept=st.slider("Select Depth",10,50,16)
+        classifier=DecisionTreeClassifier(max_depth=ndept)
     if classif == "MLP Classifier":
-        classifier=MLPClassifier(alpha=1, max_iter=1000)
+        itera=st.slider("Select number of Iternations",500,1500,1000)
+        classifier=MLPClassifier(alpha=1, max_iter=itera)
     if classif == "Extra Trees":
+        est=st.slider("Select Number of estimators",40,200,100)
         classifier=ExtraTreesClassifier(n_estimators=100, max_depth=None,min_samples_split=10, random_state=0)
 
 
